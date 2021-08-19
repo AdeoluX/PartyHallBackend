@@ -1,6 +1,8 @@
 require('dotenv').config();
 const serverless = require('serverless-http');
 const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
 const expressUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const app = express();
@@ -18,6 +20,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+app.use(helmet());
 
 app.use('/user/v1', userRoute);
 app.use('/link/v1', linkRoute);
